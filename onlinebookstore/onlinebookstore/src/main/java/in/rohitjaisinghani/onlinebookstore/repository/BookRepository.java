@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import in.rohitjaisinghani.onlinebookstore.entity.Book;
 
-@CrossOrigin("http://localhost:4200")
+
 /*crossorigin will allow the host to access outside 8080
 if there are multiple host then * is used in round brackets*/
 public interface BookRepository extends JpaRepository<Book,Long> {
@@ -20,4 +20,8 @@ public interface BookRepository extends JpaRepository<Book,Long> {
 	//to override the rest end points use RestResource
 	@RestResource(path="categoryid")
 	Page<Book> findByCategoryId(@Param("id")Long id,Pageable pageable);
+	
+	//'containing' works like 'LIKE' operator 
+	@RestResource(path="searchbykeyword")
+	Page<Book> findByNameContaining(@Param("name")String keyword,Pageable pageable);
 }

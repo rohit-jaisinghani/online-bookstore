@@ -21,6 +21,10 @@ public class RepositoryConfig implements RepositoryRestConfigurer{
 		config.exposeIdsFor(entityManager.getMetamodel().getEntities().stream()
 				.map(Type::getJavaType)
 				.toArray(Class[]::new));
+		config.getCorsRegistry()
+			  .addMapping("/**")
+			  .allowedOrigins("http://localhost:4200");
+		//config.getCors will allow all the repositories to give data to localhost 4200 no need to mention cross origin in every repositoryfile
 	}
 
 }
